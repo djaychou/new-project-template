@@ -64,3 +64,7 @@ If no changes detected, tell the user the schema is already up to date.
 ### Step 5: Confirm completion
 
 Tell the user the schema has been updated and show a short summary of changes.
+
+### Notes
+- Requires Supabase CLI and an active project link.
+- The schema file is optimized for AI agent reference.
