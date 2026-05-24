@@ -16,6 +16,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 <!-- TODO: Fill in after user provides the project brief -->
 <!-- Include: project description, tech stack, project structure, key patterns, important files -->
 
+## Project Setup
+
+When the user provides a project brief for the first time:
+1. Fill in the **Development Commands** and **Architecture Overview** sections above based on the brief.
+2. Run `/sync-toolkit` to pull the latest skills and agents from `~/ai-toolkit`.
+3. Proceed with project scaffolding.
+
 ## Agent Rules
 Keep responses brief and concise. Sacrifice vocabulary for concision.
 
