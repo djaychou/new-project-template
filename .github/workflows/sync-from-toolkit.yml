@@ -1,0 +1,52 @@
+name: Sync from ai-toolkit
+
+on:
+  schedule:
+    - cron: '0 0 * * 0' # Weekly on Sunday midnight UTC
+  workflow_dispatch: # Manual trigger
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout template repo
+        uses: actions/checkout@v4
+
+      - name: Checkout ai-toolkit
+        uses: actions/checkout@v4
+        with:
+          repository: djaychou/ai-toolkit
+          path: _ai-toolkit
+
+      - name: Sync skills and agents
+        run: |
+          # Sync skills
+          rm -rf .claude/skills
+          mkdir -p .claude/skills
+          cp -R _ai-toolkit/skills/* .claude/skills/
+
+          # Sync agents
+          rm -rf .claude/agents
+          mkdir -p .claude/agents
+          cp -R _ai-toolkit/agents/* .claude/agents/
+
+          # Cleanup
+          rm -rf _ai-toolkit
+
+      - name: Check for changes
+        id: changes
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and push
+        if: steps.changes.outputs.has_changes == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .claude/skills .claude/agents
+          git commit -m "chore: sync skills and agents from ai-toolkit"
+          git push
