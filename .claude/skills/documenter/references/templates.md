@@ -266,3 +266,80 @@ Input → Step 1 → Step 2 → Output
 ## Archive
 {Empty until content becomes obsolete}
 ```
+
+---
+
+## Handoff Template
+
+Path: `docs/handoffs/{feature}/{YYYY-MM-DD}-{topic}.md` (`general/` for repo-wide work).
+
+```markdown
+# Handoff: {what is being handed off}
+
+**Created:** {YYYY-MM-DD}
+**Status:** open
+**Feature:** `{feature}` ({link to docs/features/{feature}.md, or "no feature doc yet"})
+**From:** {session or agent name/id}
+**Summary:** {2-3 sentences: what was being done, where it stopped, what the next agent does first}
+
+---
+
+## Read first
+1. `{file}` — {why}
+
+## State
+- **Branch:** `{branch}` · **Last deployed commit:** `{sha}` · **Production:** {url, health check}
+- **Uncommitted:**
+
+| File | Change |
+|---|---|
+| `{path}` | {what changed and why} |
+
+- **Verified:** {type check / lint / tests at handoff time}
+- **Waiting on the user:** {approvals, tests to run; each irreversible item on its own line}
+
+## Done
+- {finished item, with commit or `file:line`}
+
+## Next
+1. **{Job}** — {what and where, `file:line`}
+   - Done when: {check}
+
+## Open questions
+- {decision only the user can make; options if known}
+
+## Working notes
+- {command that works, trap that cost time}
+
+## Pickup log
+- {YYYY-MM-DD}: Created by {agent}.
+```
+
+---
+
+## Handoffs Master Index Template
+
+Path: `docs/handoffs/master.md`, created with the folder.
+
+```markdown
+# Handoffs — Master Index
+
+**Last Updated:** {YYYY-MM-DD} ({what changed})
+
+Agent-to-agent handoffs. Pick up only `open` or `in progress` ones; set the status when you do. Files: `docs/handoffs/{feature}/{YYYY-MM-DD}-{topic}.md`, where `{feature}` matches `docs/features/{feature}.md` and `general/` holds repo-wide work.
+
+<!--
+AI_AGENT_INDEX
+{feature}/{file} | {status} | {created} | {one-line summary}
+-->
+
+## Open and In Progress
+
+| Handoff | Feature | Status | Created | Summary |
+|---|---|---|---|---|
+
+## Done
+
+| Handoff | Feature | Done | Outcome |
+|---|---|---|---|
+```
